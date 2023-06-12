@@ -2,8 +2,10 @@ import { Box, Typography } from "@mui/material";
 import logo from "../../assets/getyourfood.png";
 import Avatar from "@mui/material/Avatar";
 import {useState} from "react"
+import useMediaQuery from '@mui/material/useMediaQuery';
 const Navbar = () => {
     const [loggedIn, setLoggedIn] = useState(false);
+    const matches = useMediaQuery('(min-width:768px)');
   return (
     <Box
       sx={{
