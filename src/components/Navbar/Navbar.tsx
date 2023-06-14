@@ -2,12 +2,24 @@ import { Box, Typography } from "@mui/material";
 import logo from "../../assets/getyourfood.png";
 import Avatar from "@mui/material/Avatar";
 import {useState} from "react"
+import { motion } from "framer-motion"
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useMediaQuery from '@mui/material/useMediaQuery';
 const Navbar = () => {
     const [loggedIn, setLoggedIn] = useState(false);
+    const [open,setOpen] = useState(false)
     const matches = useMediaQuery('(min-width:768px)');
+
+const nav = useNavigate()
+
+    const handleButtonClick = () => {
+     
+      setOpen((prev)=>!prev);
+    };
+    
   return (
     <Box
+    
       sx={{
         display: "flex",
         justifyContent: "space-between",
@@ -15,6 +27,10 @@ const Navbar = () => {
         padding: "4px 8px",
         zIndex: 1,
         boxShadow: 1,
+        postion:'sticky',
+        top:"0",
+        backgroundColor:'whitesmoke',
+        
       }}
     >
       <Box
@@ -29,6 +45,7 @@ const Navbar = () => {
         <Typography sx={{fontWeight:'700', fontSize:'18px'}}>Get Your Food</Typography>
       </Box>
     {!loggedIn ?  <Box
+   
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -36,7 +53,10 @@ const Navbar = () => {
           alignItems: "center",
         }}
       >
-        <Box sx={{ padding: "3px", cursor: "pointer" }}>
+        <Box sx={{ padding: "3px", cursor: "pointer", }}
+         component={motion.div}
+        onClick={()=>handleButtonClick()}
+        >
           {" "}
           <Typography
             sx={{
@@ -100,7 +120,13 @@ const Navbar = () => {
             Contact Us
           </Typography>
         </Box>
-        <Box sx={{ padding: "3px", cursor: "pointer" }}>
+        <Box
+          component={motion.div}
+     
+          onClick={()=>{
+            nav("/about")
+          }}
+        sx={{ padding: "3px", cursor: "pointer" }}>
           <Typography
             sx={{
               color: "#fff !important",
@@ -110,11 +136,11 @@ const Navbar = () => {
               borderRadius: "50px",
               display: "inline-block",
               border: "none",
-              transition: "all 0.4s ease 0s",
+              duration: 100, delay: 0.2, ease: 'easeInOut',
               "&: hover": {
                 textShadow: "0px 0px 6px rgba(255, 255, 255, 1)",
                 boxShadow: "0px 5px 40px -10px rgba(0,0,0,0.57)",
-                transition: "all 0.4s ease 0s",
+                duration: 100, delay: 0.2, ease: 'easeInOut'
               },
             }}
           >
